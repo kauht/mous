@@ -26,6 +26,7 @@ mod windows {
     use std::time::{Duration, Instant};
     use winapi::ctypes::c_int;
     use winapi::shared::minwindef::{LPVOID, UINT};
+    use winapi::shared::ntdef::NULL;
     use winapi::um::winuser::*;
 
     pub unsafe fn record() -> Vec<Movement> {
@@ -68,7 +69,6 @@ mod windows {
         while RECORDING.load(Ordering::Relaxed) {
             // fuck AtomicBool in rust
             let mut msg: MSG = zeroed(); // std::mem::zeroed() cz I can't make a variable without giving it a value for some fucking reason
-
             while PeekMessageW(&mut msg, hwnd, 0, 0, PM_REMOVE) != 0 {
                 // check if there are any messages; PM_REMOVE to remove them after viewing
                 if msg.message == WM_INPUT {
@@ -145,6 +145,11 @@ mod windows {
                 TO_RECORD.store(false, Ordering::Relaxed); // Set TO_RECORD to false
                 thread::spawn(|| {
                     let recorded_moves = record();
+                    //for mover in &recorded_moves {
+                    //    println!("{}", mover.0);
+                    //    println!("{}", mover.1);
+                    //}
+
                     RECORDING.store(false, Ordering::Relaxed); // Set RECORDING to false
                     let mut moves = RECORDED_MOVEMENTS.lock().unwrap();
                     *moves = recorded_moves;
