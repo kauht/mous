@@ -7,8 +7,15 @@ There is a fuck ton of reason why you would want to use this program, weather it
 
 
 ## Feature ideas
-- [ ] OSU! editor style macro editor UI
-- [ ] Combine with autoclicker? (probs not tbh)
-- [ ] etc.
-- [ ] etc.
-- [ ] idk
+- OSU! editor style macro editor UI
+- Combine with autoclicker? (probs not tbh)
+- etc.
+- etc.
+- idk
+
+
+## Progress
+- [x] Make basic ass ui and the actual macro part
+- [ ] add file output instead of storing a massive movements array in FUCKING MEMORY (LOL I'M RETARDED)
+- [ ] Relative/Absolute recorder option
+- [ ] fucking something else that's cool
